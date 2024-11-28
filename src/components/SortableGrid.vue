@@ -165,6 +165,14 @@ span.name {
 span.small {
   padding-right: 2px;
 }
+
+
+.text-bg-secondary {
+    margin: 5px; 
+    background-color: aquamarine;
+}
+
+
 table {
   margin-top: 10px;
 
