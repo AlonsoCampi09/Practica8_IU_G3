@@ -26,6 +26,8 @@
   </div>
   <div v-if="advSearch" class="row mt-3">
     <div class="col-auto">
+      <button type="button" class="btn btn-outline-danger" 
+            @click="clearAllFields" title="Limpiar búsqueda">❌</button>
       <div v-for="col in columns" :key="col.key">
         <div class="row g-3 align-items-center">
           <div class="col-auto first">
@@ -67,6 +69,15 @@ function updateValue(key) {
 
 // vacía la parte del filtro que no esté seleccionada
 function toggleAdvanced() {
+  advSearch.value = !advSearch.value
+  if (advSearch.value) {
+    filter.value.all = ''
+  } else {
+    filter.value.fields = {}
+  }
+}
+
+function clearAllFields() {
   advSearch.value = !advSearch.value
   if (advSearch.value) {
     filter.value.all = ''
