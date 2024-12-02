@@ -173,6 +173,20 @@ onMounted(() => {
     .map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 })
 
+onMounted(() => {
+  const tableBody = document.querySelector('.overflow-y-scroll tbody');
+  if (tableBody) {
+    tableBody.addEventListener('click', () => {
+      const details = document.getElementById('div-details');
+      if (details) {
+        details.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        console.warn("El div con id 'details' no está disponible en el DOM.");
+      }
+    });
+  }
+});
+
 const props = defineProps(['state'])
 
 const debug = false;
