@@ -16,7 +16,7 @@
             label="Asignatura" />
           <br>
           <TextBox :start="'' + group.credits" id="e-credits" label="Créditos" />
-          <TextBox :start="'' + group.isLab" id="e-isLab" label="Prácticas" />
+          <BooleanBox :start="'' + group.isLab" id="e-isLab" label="Prácticas" />
           <SelectBox 
             :all="gState.model.getUsers({ userRole: gState.model.UserRole.TEACHER })" 
             :start="group.teacherId"
@@ -44,6 +44,7 @@ import BaseModal from './BaseModal.vue';
 import TextBox from './TextBox.vue'
 import SelectBox from './SelectBox.vue'
 import SlotBox from './SlotBox.vue'
+import BooleanBox from './BooleanBox.vue'
 
 import { gState } from '../state.js';
 import { ref } from 'vue'

@@ -117,15 +117,13 @@
     </div>
   </div>
 
-  <!-- 
+<!-- 
     Modal para confirmaciones
     siempre usamos el mismo, y no se muestra hasta que hace falta
   -->
-  <ConfirmModal ref="confirmMOdalRef" :isAdd="false" :text="confirmModalText" :action="confirmAction"
+  <ConfirmModal ref="confirmModalRef" :isAdd="false"  :text="confirmModalText" :action="confirmAction" />
     @add="(o) => { console.log('adding', o); gState.model.addUser(o); gState.key++ }"
     @edit="(o) => { console.log('setting', o); gState.model.setUser(o); gState.key++ }" />
-
-
 
   <!-- 
     Modal para crear/editar usuario
@@ -135,12 +133,6 @@
     @add="(o) => { console.log('adding', o); gState.model.addUser(o); gState.key++ }"
     @edit="(o) => { console.log('setting', o); gState.model.setUser(o); gState.key++ }" />
 
-  <!-- Modal para confirmar eliminación -->
-  <ConfirmationModal 
-    ref="confirmRemoveModal" 
-    :message="'Are you sure you want to remove this user?'" 
-    @confirm="handleRemoveUser" 
-  />
 
   <!-- 
     Modal para crear/editar asignatura
@@ -307,13 +299,16 @@ const selectOne = (type, id) => {
   selected.value = element
 }
 
+
 /////
 // Modal para confirmaciones
 /////
 let confirmModalRef = ref(null);
-let confirmModalText = ref("textoConfirmacion"); // metemos html bonito y accion
+let confirmModalText = ref("texto"); // texto a mostrar en modal
+let confirmAction = ref(null);       // funcion a la que llamar si se confirma
+
 //let confirmAction = ref(() => {}); //funcion a la que se llama si se confirma
-let confirmAction = ref(null); 
+
 /////
 // Usuarios
 /////
@@ -336,60 +331,57 @@ async function editUser(id) {
 }
 
 async function confirmRmUser(id) {
-  console.log("now confirming removal of user", id)
-  confirmModalText = 'Do you want to completely remove User '
+  console.log("now confirming removal of", id)
+  confirmModalText.value = `
+    ¿Quieres eliminar del todo al usuario ${gState.resolve(id).userName}?`
+  confirmAction.value = () => {
+    gState.model.rmUser(id)
+    if (selected.value.id == id) {
+      selected.value = { id: -1 };
+    }
+    gState.key++
 
-  confirmAction.value = ref(() => {
-  gState.model.rmUser(id)
-  if (selected.value.id == id) {
-    selected.value = { id: -1 };
+    confirmModalRef.value.hide()    
+
   }
-  gState.key++});
-  gState.model.rmUser(id)
-  if (selected.value.id == id) {
-    selected.value = { id: -1 };
-  }
-  gState.key++
   // da tiempo a Vue para que prepare el componente antes de mostrarlo
   await nextTick()
   confirmModalRef.value.show()
 }
 
 async function confirmRmSubject(id) {
-  console.log("now confirming removal of subject", id)
-  confirmModalText = 'Do you want to completely remove subject '
+  console.log("now confirming removal of", id)
+  confirmModalText.value = `
+    ¿Quieres eliminar del todo la asignatura ${gState.resolve(id).subject}?`
+  confirmAction.value = () => {
+    gState.model.rmSubject(id)
+    if (selected.value.id == id) {
+      selected.value = { id: -1 };
+    }
+    gState.key++
 
-  confirmAction.value = ref(() => {
-  gState.model.rmUser(id)
-  if (selected.value.id == id) {
-    selected.value = { id: -1 };
+    confirmModalRef.value.hide()    
+
   }
-  gState.key++});
-  gState.model.rmUser(id)
-  if (selected.value.id == id) {
-    selected.value = { id: -1 };
-  }
-  gState.key++
   // da tiempo a Vue para que prepare el componente antes de mostrarlo
   await nextTick()
   confirmModalRef.value.show()
 }
 
 async function confirmRmGroup(id) {
-  console.log("now confirming removal of user", id)
-  confirmModalText = 'Do you want to completely remove group '
+  console.log("now confirming removal of", id)
+  confirmModalText.value = `
+    ¿Quieres eliminar del todo al grupo ${gState.resolve(id).group}?`
+  confirmAction.value = () => {
+    gState.model.rmGroup(id)
+    if (selected.value.id == id) {
+      selected.value = { id: -1 };
+    }
+    gState.key++
 
-  confirmAction.value = ref(() => {
-  gState.model.rmUser(id)
-  if (selected.value.id == id) {
-    selected.value = { id: -1 };
+    confirmModalRef.value.hide()    
+    
   }
-  gState.key++});
-  gState.model.rmUser(id)
-  if (selected.value.id == id) {
-    selected.value = { id: -1 };
-  }
-  gState.key++
   // da tiempo a Vue para que prepare el componente antes de mostrarlo
   await nextTick()
   confirmModalRef.value.show()
@@ -428,21 +420,19 @@ async function editSubject(id) {
 function rmSubject(id) {
 
   confirmRmSubject(id);
-
-  /*if (selected.value.id == id) {
+  // pista para hacer ej 6 con confirm (cutre, lo estamos haciendo con modal)
+/*
+  if (confirm("Quieres eliminar del todo al pobre "+gState.resolve(id).name+"?")) {
+    gState.model.rmUser(id)
+    if (selected.value.id == id) {
       selected.value = { id: -1 };
-  }  
-  gState.model.rmSubject(id)
-  gState.key++*/
-
-  /*if(confirm("Quieres borrar" + gState.resolve(id).userName+"?"))
-  {
-
-  }
-  else
-  {
-  console.log("no se elimina")
+    }
+    gState.key++
+  } else {
+    console.log("no se elimina")
+    return;
   }*/
+
 }
 
 

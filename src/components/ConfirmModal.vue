@@ -33,7 +33,12 @@ let modalRef = ref(null);
 function show() {
   modalRef.value.show();
 }
-defineExpose({ show });
+
+function hide() {
+  modalRef.value.hide();
+}
+
+defineExpose({ show, hide });
 </script>
 
 <style scoped>
