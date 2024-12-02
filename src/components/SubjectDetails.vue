@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-
+  // ej6 se envia un evento rmSubject a DetailsPane y este a PMState
 import { gState } from '../state.js';
 
 defineEmits([

@@ -30,7 +30,6 @@
     <div class="btn-group">
       <button @click="$emit('editUser')" title="Editar profesor" class="btn btn-outline-success">✏️</button>
       <button @click="$emit('rmUser')" title="Borrar profesor" class="btn btn-outline-danger">🗑️</button>
-      <button @click="openRemoveUserModal" class="btn btn-outline-danger">🗑️</button>
     </div>
   </div>
 </template>

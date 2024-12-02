@@ -26,8 +26,6 @@
   </div>
   <div v-if="advSearch" class="row mt-3">
     <div class="col-auto">
-      <button type="button" class="btn btn-outline-danger" 
-            @click="clearAllFields" title="Limpiar búsqueda">❌</button>
       <div v-for="col in columns" :key="col.key">
         <div class="row g-3 align-items-center">
           <div class="col-auto first">
@@ -38,6 +36,10 @@
               @input="updateValue(col.key)" class="form-control">
           </div>
         </div>
+      </div>
+      <div class="button_clear">
+        <button type="button" class="btn btn-outline-danger" 
+            @click="clearAllFields" title="Limpiar búsqueda">❌</button>
       </div>
     </div>
   </div>
@@ -78,12 +80,10 @@ function toggleAdvanced() {
 }
 
 function clearAllFields() {
-  advSearch.value = !advSearch.value
-  if (advSearch.value) {
-    filter.value.all = ''
-  } else {
-    filter.value.fields = {}
-  }
+  filter.value.all = ''
+
+  filter.value.fields = {}
+  
 }
 
 
@@ -93,6 +93,11 @@ function clearAllFields() {
 <style scoped>
 .btn.active.b-avanzada {
   background-color: lightblue;
+}
+
+.btn-outline-danger{
+  width: 100%;
+  margin: 1em;
 }
 
 .first {
