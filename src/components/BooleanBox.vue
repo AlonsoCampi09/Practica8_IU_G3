@@ -4,14 +4,14 @@
             <label :for="id" class="form-label">{{ label }}</label>
         </div>
         <div class="col-auto">
-            <input type="radio" id="radio_no" name="labs_pro" value="false"
+            <input type="radio" id="radio_no" name="labs_pro" value="false" class="me-2"
                 :checked="start === 'false'" 
                 @change="$emit('change', value);">
-            <label for="radio_no">No</label>
-            <input type="radio" id="radio_yes" name="labs_pro" value="true"
+            <label for="radio_no" class="me-2">No</label>
+            <input type="radio" id="radio_yes" name="labs_pro" value="true" class="me-2"
                 :checked="start === 'true'" 
                 @change="$emit('change', value);">
-            <label for="radio_yes">Si</label>
+            <label for="radio_yes" class="me-2">Si</label>
         </div>
     </div>
 </template>
@@ -34,4 +34,8 @@ onMounted(() => {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+.me-2{
+    margin: 5px;
+}
+</style>
