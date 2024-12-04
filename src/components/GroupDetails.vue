@@ -12,7 +12,7 @@
       </tr>
       <tr>
         <th>Cuatrimestre</th>
-        <td>{{ subject.semester }}</td>
+        <td>{{ semesterNames[subject.semester] }}</td>
       </tr>
       <tr>
         <th>Profesor</th>
@@ -39,7 +39,7 @@
 import SortableGrid from './SortableGrid.vue';
 import TimeTable from './TimeTable.vue';
 
-import { gState, weekDayNames } from '../state.js';
+import { gState, weekDayNames, semesterNames } from '../state.js';
 import { ref, computed } from 'vue'
 
 defineEmits([
