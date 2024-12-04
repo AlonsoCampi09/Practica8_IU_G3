@@ -5,7 +5,7 @@
   Los filtros son los que genera FilterOrAddBox - prop 'filter'
 -->
 <template>
-  <table v-if="filteredData.length">
+  <table v-if="filteredData.length" id="mainSortableTable">
     <thead>
        <tr v-for="entry in filteredData" :key="entry.id"></tr>
       <tr>        
@@ -172,13 +172,73 @@ span.small {
     background-color: aquamarine;
 }
 
-
-table {
-  margin-top: 10px;
-
-}
 thead>tr {
   border-bottom: 1px solid gray;
   color: rgb(104, 103, 103);
 }
+
+
+/* Styling specifically for the table with id mainSortableTable */
+#mainSortableTable {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Table header styling */
+#mainSortableTable thead {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#mainSortableTable th, #mainSortableTable td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Alternate row colors */
+#mainSortableTable tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Hover effect for rows (more pronounced) */
+#mainSortableTable tbody tr:hover {
+    background-color: #aef6ff; 
+    cursor: pointer;
+}
+
+/* Media query for responsiveness */
+@media (max-width: 600px) {
+    #mainSortableTable thead {
+        display: none; /* Hide table header */
+    }
+    #mainSortableTable tr {
+        display: block;
+        margin-bottom: 10px;
+    }
+    #mainSortableTable td {
+        display: block;
+        text-align: right;
+        padding: 8px;
+        position: relative;
+    }
+    #mainSortableTable td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 8px;
+        text-align: left;
+        font-weight: bold;
+    }
+}
+
+
+
+
 </style>
