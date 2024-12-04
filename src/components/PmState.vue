@@ -193,9 +193,9 @@ const debug = false;
 
 // para vista de usuarios; ver doc. en SortableGrid
 const userColumns = [
-  { key: 'userName', display: 'Login', type: 'String' },
-  { key: 'firstName', display: 'First name', type: 'String' },
-  { key: 'lastName', display: 'Last name', type: 'String' },
+  { key: 'userName', display: 'Sesión', type: 'String' },
+  { key: 'firstName', display: 'Nombre', type: 'String' },
+  { key: 'lastName', display: 'Apellidos', type: 'String' },
   { key: 'maxCredits', display: 'Totales', type: 'Number' },
   { key: 'assignedCredits', display: 'Imparte', type: 'Number' },
   { 
