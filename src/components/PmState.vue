@@ -27,7 +27,7 @@
               @click="gState.currentListing = 'groups'">Grupos</a>
           </li>
           <li class="nav-item">
-            <a href="#" aria-current="page" title = "Consultar aulas"
+            <a href="#" aria-current="page" title = "Consultar aulas/laboratorios"
               :class="`nav-link active ${gState.currentListing == 'locations' ? 'boxed' : ''}`"
               @click="gState.currentListing = 'locations'">Espacios</a>
           </li>
