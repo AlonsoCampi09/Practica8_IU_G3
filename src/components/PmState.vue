@@ -190,9 +190,9 @@ const debug = false;
 
 // para vista de usuarios; ver doc. en SortableGrid
 const userColumns = [
-  { key: 'userName', display: 'Login', type: 'String' },
-  { key: 'firstName', display: 'First name', type: 'String' },
-  { key: 'lastName', display: 'Last name', type: 'String' },
+  { key: 'userName', display: 'Sesión', type: 'String' },
+  { key: 'firstName', display: 'Nombre', type: 'String' },
+  { key: 'lastName', display: 'Apellidos', type: 'String' },
   { key: 'maxCredits', display: 'Totales', type: 'Number' },
   { key: 'assignedCredits', display: 'Imparte', type: 'Number' },
   { 
@@ -342,7 +342,7 @@ async function editUser(id) {
 }
 
 async function confirmRmUser(id) {
-  console.log("now confirming removal of", id)
+  console.log("Confirmando eliminación de", id)
   confirmModalText.value = `
     ¿Quieres eliminar del todo al usuario ${gState.resolve(id).userName}?`
   confirmAction.value = () => {
@@ -361,28 +361,49 @@ async function confirmRmUser(id) {
 }
 
 async function confirmRmSubject(id) {
-  console.log("now confirming removal of", id)
-  confirmModalText.value = `
-    ¿Quieres eliminar del todo la asignatura ${gState.resolve(id).subject}?`
-  confirmAction.value = () => {
-    gState.model.rmSubject(id)
-    if (selected.value.id == id) {
-      selected.value = { id: -1 };
-    }
-    gState.key++
 
-    confirmModalRef.value.hide()    
+  let s = gState.model.resolve(id)
+  if (s.groups.length > 0)
+  {
+      console.log("Cancelada la confirmación de eliminación de ", id)
+      
+    confirmModalText.value = `
+      No se puede eliminar la asignatura ${s.name},
+       elimina primero sus grupos.`
+
+    confirmAction.value = () => {
+      confirmModalRef.value.hide()    
+  }
+  }
+  else
+  {
+      console.log("confirmando eliminación de ", id)
+
+    confirmModalText.value = `
+      ¿Quieres eliminar del todo la asignatura ${gState.resolve(id).name}?`
+    confirmAction.value = () => {
+      gState.model.rmSubject(id)
+      if (selected.value.id == id) {
+        selected.value = { id: -1 };
+      }
+      gState.key++
+
+      confirmModalRef.value.hide()    
 
   }
+  }
+
+
   // da tiempo a Vue para que prepare el componente antes de mostrarlo
   await nextTick()
   confirmModalRef.value.show()
 }
 
 async function confirmRmGroup(id) {
-  console.log("now confirming removal of", id)
+  console.log("Confirmando eliminación de", id)
+  
   confirmModalText.value = `
-    ¿Quieres eliminar del todo al grupo ${gState.resolve(id).group}?`
+    ¿Quieres eliminar del todo al grupo ${gState.resolve(id).name}?`
   confirmAction.value = () => {
     gState.model.rmGroup(id)
     if (selected.value.id == id) {
