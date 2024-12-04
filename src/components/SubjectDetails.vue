@@ -12,7 +12,7 @@
         </tr>
         <tr>
           <th>Cuatrimestre</th>
-          <td>{{ subject.semester }} </td>
+          <td>{{ semesterNames[subject.semester] }} </td>
         </tr>
         <tr>
           <th>Códigos GEA</th>
@@ -37,7 +37,7 @@
 
 <script setup>
   // ej6 se envia un evento rmSubject a DetailsPane y este a PMState
-import { gState } from '../state.js';
+import { gState, semesterNames } from '../state.js';
 
 defineEmits([
   'editSubject',
