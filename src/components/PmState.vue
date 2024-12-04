@@ -12,22 +12,22 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a href="#" aria-current="page"
+            <a href="#" aria-current="page" title = "Gestionar o consultar profesores"
               :class="`nav-link active ${gState.currentListing == 'users' ? 'boxed' : ''}`"
               @click="gState.currentListing = 'users'">Profesores</a>
           </li>
           <li class="nav-item">
-            <a href="#" aria-current="page"
+            <a href="#" aria-current="page" title = "Gestionar o consultar asignaturas"
               :class="`nav-link active ${gState.currentListing == 'subjects' ? 'boxed' : ''}`"
               @click="gState.currentListing = 'subjects'">Asignaturas</a>
           </li>
           <li class="nav-item">
-            <a href="#" aria-current="page"
+            <a href="#" aria-current="page" title = "Gestionar o consultar grupos"
               :class="`nav-link active ${gState.currentListing == 'groups' ? 'boxed' : ''}`"
               @click="gState.currentListing = 'groups'">Grupos</a>
           </li>
           <li class="nav-item">
-            <a href="#" aria-current="page"
+            <a href="#" aria-current="page" title = "Consultar aulas"
               :class="`nav-link active ${gState.currentListing == 'locations' ? 'boxed' : ''}`"
               @click="gState.currentListing = 'locations'">Espacios</a>
           </li>
@@ -122,9 +122,6 @@
     siempre usamos el mismo, y no se muestra hasta que hace falta
   -->
   <ConfirmModal ref="confirmModalRef" :isAdd="false"  :text="confirmModalText" :action="confirmAction" />
-    @add="(o) => { console.log('adding', o); gState.model.addUser(o); gState.key++ }"
-    @edit="(o) => { console.log('setting', o); gState.model.setUser(o); gState.key++ }" />
-
   <!-- 
     Modal para crear/editar usuario
     siempre usamos el mismo, y no se muestra hasta que hace falta
@@ -193,9 +190,9 @@ const debug = false;
 
 // para vista de usuarios; ver doc. en SortableGrid
 const userColumns = [
-  { key: 'userName', display: 'Login', type: 'String' },
-  { key: 'firstName', display: 'First name', type: 'String' },
-  { key: 'lastName', display: 'Last name', type: 'String' },
+  { key: 'userName', display: 'Sesión', type: 'String' },
+  { key: 'firstName', display: 'Nombre', type: 'String' },
+  { key: 'lastName', display: 'Apellidos', type: 'String' },
   { key: 'maxCredits', display: 'Totales', type: 'Number' },
   { key: 'assignedCredits', display: 'Imparte', type: 'Number' },
   { 
