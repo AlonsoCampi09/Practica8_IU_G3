@@ -193,7 +193,7 @@ thead>tr {
 
 /* Table header styling */
 #mainSortableTable thead {
-    background-color: #4CAF50;
+    background-color: #91f694;
     color: white;
 }
 
