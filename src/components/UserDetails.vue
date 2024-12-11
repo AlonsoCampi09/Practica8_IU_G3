@@ -24,7 +24,36 @@
 
     <SortableGrid :data="addSlotCols(slots)" :columns="slotColumns" 
       :filter="{ all: '', fields: [] }" v-model:sorter="sorter" />
-    <TimeTable :slots="slots" />
+    
+    <h5>Horarios</h5>
+
+    <!-- Botones para seleccionar el cuatrimestre -->
+    <div class="btn-group">
+      <button 
+        :class="{ active: selectedSemester === 'FALL' }"
+        @click="selectedSemester = 'FALL'"
+        class="btn btn-outline-primary"
+      >
+        Primer cuatrimestre
+      </button>
+      <button 
+        :class="{ active: selectedSemester === 'SPRING' }"
+        @click="selectedSemester = 'SPRING'"
+        class="btn btn-outline-primary"
+      >
+        Segundo cuatrimestre
+      </button>
+    </div>
+
+    <!-- Mostrar TimeTable del cuatrimestre seleccionado -->
+    <div v-if="selectedSemester === 'FALL'">
+      <h6>Primer cuatrimestre</h6>
+      <TimeTable :slots="slots.filter(o => o.semester === 'FALL')" />
+    </div>
+    <div v-else-if="selectedSemester === 'SPRING'">
+      <h6>Segundo cuatrimestre</h6>
+      <TimeTable :slots="slots.filter(o => o.semester === 'SPRING')" />
+    </div>
 
     <h5>Acciones</h5>
     <div class="btn-group">
@@ -48,8 +77,8 @@ const props = defineProps({
 });
 
 let sorter = ref([{ key: 'weekDay', order: 1 }]);
-
 const slots = computed(() => slotsOfAllGroups(props.user.groups));
+const selectedSemester = ref('FALL'); // Estado inicial del cuatrimestre seleccionado.
 
 const slotsOfAllGroups = (gg) => {
   const rv = [];
@@ -118,3 +147,10 @@ onBeforeUnmount(() => {
   }
 });
 </script>
+
+<style>
+.btn-group button.active {
+  background-color: #007bff;
+  color: white;
+}
+</style>
